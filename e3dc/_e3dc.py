@@ -150,7 +150,7 @@ class E3DC:
                 self.serialNumberPrefix = "Q10-"
         elif self.serialNumber.startswith("7"):
             self.model = "Pro"
-            self.pmIndex = 6
+            self.pmIndex = 0
             if not self.serialNumberPrefix:
                 self.serialNumberPrefix = "P10-"
         else:
@@ -1378,7 +1378,6 @@ class E3DC:
         usedStringCount = int(rscpFindTag(req, "PVI_USED_STRING_COUNT")[2])
 
         voltageMonitoring = rscpFindTag(req, "PVI_VOLTAGE_MONITORING")
-        cosPhi = rscpFindTag(req, "PVI_COS_PHI")
         frequency = rscpFindTag(req, "PVI_FREQUENCY_UNDER_OVER")
         deviceState = rscpFindTag(req, "PVI_DEVICE_STATE")
 
@@ -1386,11 +1385,6 @@ class E3DC:
             "acMaxApparentPower": rscpFindTag(
                 rscpFindTag(req, "PVI_AC_MAX_APPARENTPOWER"), "PVI_VALUE"
             )[2],
-            "cosPhi": {
-                "active": rscpFindTag(cosPhi, "PVI_COS_PHI_IS_AKTIV")[2],
-                "value": rscpFindTag(cosPhi, "PVI_COS_PHI_VALUE")[2],
-                "excited": rscpFindTag(cosPhi, "PVI_COS_PHI_EXCITED")[2],
-            },
             "deviceState": {
                 "connected": rscpFindTag(deviceState, "PVI_DEVICE_CONNECTED")[2],
                 "working": rscpFindTag(deviceState, "PVI_DEVICE_WORKING")[2],
